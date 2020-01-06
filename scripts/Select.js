@@ -106,6 +106,5 @@ const langs = {
 const selectLangsElement = document.getElementById('languages');
 
 Object.keys(langs).map(l => {
-  console.log(l)
   selectLangsElement.innerHTML += `<option value="${l}">${langs[l]}</option>`;
 })
