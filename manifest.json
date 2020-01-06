@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "Text Translate",
+  "name": "W-Translate",
   "description": "Translate selected text in current tab (page) from English to any language...",
   "version": "1.0",
   "icons": {
@@ -10,7 +10,7 @@
     "32": "icons/icon32.png"
   },
   "browser_action": {
-    "default_title": "TextTranslate",
+    "default_title": "W-Translate",
     "default_popup": "popup.html",
     "browser_style": true
   },
