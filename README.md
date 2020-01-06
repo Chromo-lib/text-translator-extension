@@ -1,4 +1,4 @@
-# TextTranslate
+# W-Translate
 
 Browser extension To translate selected text in current tab (page) from English to any language..
 
