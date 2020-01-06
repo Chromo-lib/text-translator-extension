@@ -7,7 +7,7 @@ Browser extension To translate selected text in current tab (page) from English 
 ![icon](icons/icon64.png)
 
 ### Todo
-- [x] from Engish to any language.
+- [x] from English to any language.
 - [ ] from any langauge to any.
 
 # License
