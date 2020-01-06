@@ -4,7 +4,7 @@
   "description": "Translate selected text in current tab (page) from English to any language...",
   "version": "1.0",
   "icons": {
-    "512": "icons/icon512.png",
+    "256": "icons/icon256.png",
     "128": "icons/icon128.png",
     "64": "icons/icon64.png",
     "32": "icons/icon32.png"
