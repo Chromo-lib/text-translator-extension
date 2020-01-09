@@ -9,7 +9,7 @@ To Translate the selected text in current tab (page) from English to any languag
 
 ### Capture
 
-![Capture](https://i.ibb.co/crYR8ty/Capture.png)
+![Capture](https://i.ibb.co/3s6R69M/Capture.png)
 
 ### Features
 - [x] from English to any language.
