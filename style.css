@@ -8,12 +8,15 @@ select {
 .list-group-item, body {
   font-size: 16px;
   margin: 0;
-  background-color: #343a40 !important;
+  background-color: #212123 !important;
   color: #ffffff;
 }
 
 .container {  padding: 0;   min-width: 400px; overflow: auto; }
 
+header {display: flex; align-items: center; padding: 20px; background-color: #262829 !important;}
+header img{max-width: 50px; max-height: 50px;}
+p{font-size: 14px;}
 /* list */
 .list-group {padding: 0; margin: 0;}
 .list-group li {
@@ -24,5 +27,9 @@ select {
 }
 
 /* util */
-.bg-rcolor {background-color: #e91e63 !important;}
-.mb10 {margin-bottom: 10px; text-transform: uppercase; font-size: 14px;}
+.bg-rcolor {background-color: #262829 !important;}
+.mb10 {margin-bottom: 10px; text-transform: uppercase; font-size: 14px; color: #4cd56d; font-weight: 600;}
+.m-0 {margin: 0;}
+.ml-10 {margin-left: 10px;}
+.ml-20 {margin-left: 20px;}
+.text-gray{color: #e8e8e8;}

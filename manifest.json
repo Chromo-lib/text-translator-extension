@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "W-Translate",
-  "description": "Translate selected text in current tab (page) from English to any language...",
+  "description": "Translate the selected text in current tab (page) from English to any language by one click..",
   "version": "1.0",
   "icons": {
     "256": "icons/icon256.png",

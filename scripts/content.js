@@ -1,9 +1,9 @@
 window.addEventListener('mouseup', (e) => {
 
-  var selectedWord = window.getSelection().toString().trim();
-
-  if (selectedWord && selectedWord.length > 1) {
-    selectedWord = selectedWord.replace(/[&\/\\#,+()$~%.'":*?<>{}\]\[\=]/g, ' ');;
-    chrome.runtime.sendMessage({ text: selectedWord });
+  var wdwSelection = window.getSelection().toString().trim();
+  
+  if (wdwSelection && wdwSelection.length > 1) {
+    wdwSelection = wdwSelection.replace(/[&\/\\#,+()$~%.'":*?<>{}\]\[\=]/g, ' ');;
+    chrome.runtime.sendMessage({ text: wdwSelection });
   }
 });

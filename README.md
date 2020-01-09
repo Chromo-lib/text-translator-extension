@@ -1,6 +1,7 @@
 # W-Translate
 
-Browser extension To translate selected text in current tab (page) from English to any language..
+Browser extension  
+To Translate the selected text in current tab (page) from English to any language by one click..
 
 ### Icon
 
@@ -10,7 +11,7 @@ Browser extension To translate selected text in current tab (page) from English 
 
 ![Capture](https://i.ibb.co/crYR8ty/Capture.png)
 
-### Todo
+### Features
 - [x] from English to any language.
 - [ ] from any langauge to any.
 
