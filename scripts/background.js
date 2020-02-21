@@ -1,6 +1,6 @@
-var selectedWord = 'hello';
+var wdwSelection = 'hello';
 chrome.runtime.onMessage.addListener(receiver);
 
 function receiver (request, sender, response) {
-  selectedWord = request.text;
+  wdwSelection = (request.text && request.text.length > 0) ? request.text : 'hello';  
 }

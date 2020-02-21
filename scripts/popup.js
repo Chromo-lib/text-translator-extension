@@ -1,15 +1,13 @@
 window.addEventListener('load', () => {
 
-  const bgword = chrome.extension.getBackgroundPage();
-  const targetWord = bgword.selectedWord;
+  const { wdwSelection } = chrome.extension.getBackgroundPage();
   const selectLangs = document.getElementById('languages');
 
   (async () => {
     try {
-      const gResult = await translateTo(targetWord, 'fr');
-      const result = await translate(targetWord);
-
-      createLiElements (targetWord, 'French', gResult)
+      const gResult = await translateTo(wdwSelection, 'ar');
+      //const result = await translate(wdwSelection);     
+      createLiElements(wdwSelection, 'Arabic', gResult);
     }
     catch (e) {
       //console.log(e)
@@ -20,26 +18,28 @@ window.addEventListener('load', () => {
   function getSelectedLang (e) {
     const selectedLangText = selectLangs.options[selectLangs.selectedIndex].text;
 
-    translateTo(targetWord, e.target.value)
+    translateTo(wdwSelection, e.target.value)
       .then(gResult => {
-        createLiElements (targetWord, selectedLangText, gResult);
+        createLiElements(wdwSelection, selectedLangText, gResult);
       })
       .catch(e => {
 
       });
   }
 
-  function createLiElements (targetWord, selectedLangText, gResult) {
+  function createLiElements (wdwSelection, selectedLangText, gResult) {
+
+    txtAlign = selectedLangText === 'Arabic' ? 'text-align:right !important' : 'text-align:left';
+
     document.getElementById('result').innerHTML = `
       <li>
         <span class="mb10">English:</span> 
-        <span>${targetWord}</span>
+        <span>${wdwSelection}</span>
       </li>
-      <li class="bg-rcolor">
+      <li class="border-top">
         <span class="mb10">${selectedLangText}:</span>
-        <span>${gResult}</span>
+        <span style="${txtAlign}">${gResult}</span>
       </li>
     `;
   }
-
 });
