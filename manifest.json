@@ -25,7 +25,12 @@
         "<all_urls>"
       ],
       "run_at": "document_idle",
+      "css": [
+        "content.css"
+      ],
       "js": [
+        "Translate.js",
+        "./scripts/GTranslate.js",
         "./scripts/content.js"
       ]
     }

@@ -17,6 +17,7 @@ select {
 header {display: flex; align-items: center; padding: 20px; background-color: #262829 !important;}
 header img{max-width: 50px; max-height: 50px;}
 p{font-size: 14px;}
+
 /* list */
 .list-group {padding: 10px 0 !important; margin: 0;}
 .list-group li {

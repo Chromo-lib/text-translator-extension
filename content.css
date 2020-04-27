@@ -1,0 +1,12 @@
+body {position: relative; }
+
+.popup {
+  display: none;
+  position: absolute;
+  color: white;
+  padding: 7px 15px;
+  border: solid 1px rgb(180, 180, 180);
+  background: #1d1c1ce8;
+  text-align: center;
+  z-index: 999;
+}

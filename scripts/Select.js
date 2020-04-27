@@ -21,6 +21,7 @@ const langs = {
   'da': 'Danish',
   'nl': 'Dutch',
   'eo': 'Esperanto',
+  'en': 'English',
   'et': 'Estonian',
   'tl': 'Filipino',
   'fi': 'Finnish',
