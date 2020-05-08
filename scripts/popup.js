@@ -3,33 +3,32 @@ window.addEventListener('load', () => {
   const { wdwSelection } = chrome.extension.getBackgroundPage();
   const selectLangs = document.getElementById('languages');
 
-  const nativeLanguage = navigator.language.slice(0, 2) || 'ar';
-  let translatedText = '';
+  chrome.storage.sync.get(['language'], function (result) {
+    const nativeLanguage = result.language || navigator.language.slice(0, 2);
+    let translatedText = '';
 
-  (async () => {
-    try {
-      translatedText = await translateTo(wdwSelection, nativeLanguage);
-      createLiElements(wdwSelection, langs[nativeLanguage], translatedText);
-    }
-    catch (e) {
-      translatedText = await translate(wdwSelection, 'en', 'fr');
-      createLiElements(wdwSelection, langs['fr'], translatedText);
-    }
-  })();
+    (async () => {
+      try {
+        translatedText = await translateTo(wdwSelection, nativeLanguage);
+        createLiElements(wdwSelection, langs[nativeLanguage], translatedText);
+      }
+      catch (e) {}
+    })();
+
+  });
 
   selectLangs.addEventListener('change', getSelectedLang);
   function getSelectedLang (e) {
     const selectedLangText = selectLangs.options[selectLangs.selectedIndex].text;
 
-    (async () => {
-      try {
-        translatedText = await translateTo(wdwSelection, e.target.value)
-        createLiElements(wdwSelection, selectedLangText, translatedText);
-      } catch (error) {
-        translatedText = await translate(wdwSelection, 'en', e.target.value);
-        createLiElements(wdwSelection, selectedLangText, translatedText);
-      }
-    })();
+    chrome.storage.sync.set({ language: e.target.value }, function () {
+      (async () => {
+        try {
+          translatedText = await translateTo(wdwSelection, e.target.value)
+          createLiElements(wdwSelection, selectedLangText, translatedText);
+        } catch (error) {}
+      })();
+    });
   }
 
   function createLiElements (wdwSelection, selectedLangText, gResult) {

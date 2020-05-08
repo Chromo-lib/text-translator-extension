@@ -1,3 +1,5 @@
+var langRecivedFromBackground = '';
+
 window.addEventListener('mouseup', (e) => {
 
   var wgs = window.getSelection();
@@ -5,17 +7,23 @@ window.addEventListener('mouseup', (e) => {
 
   if (wdwSelection && wdwSelection.length > 1) {
     wdwSelection = wdwSelection.replace(/[&\/\\#,+()$~%.'":*?<>{}\]\[\=]/g, ' ');
-    chrome.runtime.sendMessage({ text: wdwSelection });
+
+
+    setTimeout(() => {
+      chrome.runtime.sendMessage({ text: wdwSelection });
+    }, 1000);
+
 
     (async () => {
       let gResult = '';
+
       try {
-        const language = navigator.language.slice(0, 2) || 'ar';
+
+        let local = localStorage.getItem('language');
+        const language = local || navigator.language.slice(0, 2) || 'ar';
         gResult = await translateTo(wdwSelection, language);
       }
-      catch (e) {
-        gResult = await translate(wdwSelection);
-      }
+      catch (e) { }
 
       const elements = document.getElementsByClassName("popup");
       while (elements.length > 0) elements[0].remove();
@@ -38,3 +46,11 @@ window.addEventListener('mouseup', (e) => {
     while (elements.length > 0) elements[0].remove();
   }
 });
+
+
+function receiver (request, sender, response) {
+  localStorage.setItem('language', request.language)
+  langRecivedFromBackground = request.language;
+}
+
+chrome.runtime.onMessage.addListener(receiver);

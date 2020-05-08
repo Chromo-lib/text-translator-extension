@@ -14,6 +14,11 @@
     "default_popup": "popup.html",
     "browser_style": true
   },
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage"
+  ],
   "background": {
     "scripts": [
       "./scripts/background.js"
@@ -24,7 +29,7 @@
       "matches": [
         "<all_urls>"
       ],
-      "run_at": "document_idle",
+      "run_at": "document_end",
       "css": [
         "content.css"
       ],
