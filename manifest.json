@@ -34,7 +34,6 @@
         "content.css"
       ],
       "js": [
-        "Translate.js",
         "./scripts/GTranslate.js",
         "./scripts/content.js"
       ]

@@ -108,4 +108,4 @@ const selectLangsElement = document.getElementById('languages');
 
 Object.keys(langs).map(l => {
   selectLangsElement.innerHTML += `<option value="${l}">${langs[l]}</option>`;
-})
+});

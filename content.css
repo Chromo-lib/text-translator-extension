@@ -1,6 +1,7 @@
 body {position: relative; }
 
 .popup {
+  max-width: 250px;
   display: none;
   position: absolute;
   color: white;
@@ -9,4 +10,15 @@ body {position: relative; }
   background: #1d1c1ce8;
   text-align: center;
   z-index: 999;
+}
+
+.popup::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -7px;
+  border-width: 7px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
 }

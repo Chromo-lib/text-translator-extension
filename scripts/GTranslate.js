@@ -1,5 +1,8 @@
 async function translateTo (word, targetLang) {
-  var gUrl = "https://translate.googleapis.com/translate_a/single?client=gtx&sl="
+
+  if(word) word = word.toLowerCase();
+
+  let gUrl = "https://translate.googleapis.com/translate_a/single?client=gtx&sl="
     + 'auto' + "&tl=" + targetLang + "&dt=t&q=" + encodeURI(word || 'hello');
 
   const resp = await fetch(gUrl);

@@ -1,13 +1,20 @@
+let isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+chrome = isChrome ? chrome : browser;
+
 var langRecivedFromBackground = '';
 
-window.addEventListener('mouseup', (e) => {
+function receiver (request, sender, response) {
+  localStorage.setItem('language', request.language);
+  langRecivedFromBackground = request.language;  
+}
+
+function showPop (e) {
 
   var wgs = window.getSelection();
   var wdwSelection = wgs ? wgs.toString().trim() : '';
 
   if (wdwSelection && wdwSelection.length > 1) {
     wdwSelection = wdwSelection.replace(/[&\/\\#,+()$~%.'":*?<>{}\]\[\=]/g, ' ');
-
 
     setTimeout(() => {
       chrome.runtime.sendMessage({ text: wdwSelection });
@@ -18,7 +25,6 @@ window.addEventListener('mouseup', (e) => {
       let gResult = '';
 
       try {
-
         let local = localStorage.getItem('language');
         const language = local || navigator.language.slice(0, 2) || 'ar';
         gResult = await translateTo(wdwSelection, language);
@@ -45,12 +51,7 @@ window.addEventListener('mouseup', (e) => {
     const elements = document.getElementsByClassName("popup");
     while (elements.length > 0) elements[0].remove();
   }
-});
-
-
-function receiver (request, sender, response) {
-  localStorage.setItem('language', request.language)
-  langRecivedFromBackground = request.language;
 }
 
+window.addEventListener('click', showPop);
 chrome.runtime.onMessage.addListener(receiver);

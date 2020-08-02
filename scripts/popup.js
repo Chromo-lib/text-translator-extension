@@ -1,41 +1,41 @@
-window.addEventListener('load', () => {
+let isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+chrome = isChrome ? chrome : browser;
 
-  const { wdwSelection } = chrome.extension.getBackgroundPage();
-  const selectLangs = document.getElementById('languages');
+const { wdwSelection } = chrome.extension.getBackgroundPage();
+const selectLangs = document.getElementById('languages');
 
-  chrome.storage.sync.get(['language'], function (result) {
-    const nativeLanguage = result.language || navigator.language.slice(0, 2);
-    let translatedText = '';
+chrome.storage.sync.get(['language'], function (result) {
+  const nativeLanguage = result.language || navigator.language.slice(0, 2);
+  let translatedText = '';
 
+  (async () => {
+    try {
+      translatedText = await translateTo(wdwSelection, nativeLanguage);
+      createLiElements(wdwSelection, langs[nativeLanguage], translatedText);
+    }
+    catch (e) { }
+  })();
+});
+
+
+function getSelectedLang (e) {
+  const selectedLangText = selectLangs.options[selectLangs.selectedIndex].text;
+
+  chrome.storage.sync.set({ language: e.target.value }, function () {
     (async () => {
       try {
-        translatedText = await translateTo(wdwSelection, nativeLanguage);
-        createLiElements(wdwSelection, langs[nativeLanguage], translatedText);
-      }
-      catch (e) {}
+        translatedText = await translateTo(wdwSelection, e.target.value)
+        createLiElements(wdwSelection, selectedLangText, translatedText);
+      } catch (error) { }
     })();
-
   });
+}
 
-  selectLangs.addEventListener('change', getSelectedLang);
-  function getSelectedLang (e) {
-    const selectedLangText = selectLangs.options[selectLangs.selectedIndex].text;
+function createLiElements (wdwSelection, selectedLangText, gResult) {
 
-    chrome.storage.sync.set({ language: e.target.value }, function () {
-      (async () => {
-        try {
-          translatedText = await translateTo(wdwSelection, e.target.value)
-          createLiElements(wdwSelection, selectedLangText, translatedText);
-        } catch (error) {}
-      })();
-    });
-  }
+  txtAlign = selectedLangText === 'Arabic' ? 'text-align:right !important' : 'text-align:left';
 
-  function createLiElements (wdwSelection, selectedLangText, gResult) {
-
-    txtAlign = selectedLangText === 'Arabic' ? 'text-align:right !important' : 'text-align:left';
-
-    document.getElementById('result').innerHTML = `
+  document.getElementById('result').innerHTML = `
       <li>
         <span class="mb10">English:</span> 
         <span>${wdwSelection}</span>
@@ -45,5 +45,6 @@ window.addEventListener('load', () => {
         <span style="${txtAlign}">${gResult}</span>
       </li>
     `;
-  }
-});
+}
+
+selectLangs.addEventListener('change', getSelectedLang);
