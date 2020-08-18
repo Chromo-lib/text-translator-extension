@@ -1,50 +1,31 @@
-let isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-chrome = isChrome ? chrome : browser;
-
-const { wdwSelection } = chrome.extension.getBackgroundPage();
-const selectLangs = document.getElementById('languages');
-
-chrome.storage.sync.get(['language'], function (result) {
-  const nativeLanguage = result.language || navigator.language.slice(0, 2);
-  let translatedText = '';
-
-  (async () => {
-    try {
-      translatedText = await translateTo(wdwSelection, nativeLanguage);
-      createLiElements(wdwSelection, langs[nativeLanguage], translatedText);
+(function () {
+  chrome.storage.local.get(['selectedText'], (result) => {
+    const txtArea = document.getElementById('txt-area');
+    if (result && result.selectedText && txtArea) {
+      txtArea.value = result.selectedText;
     }
-    catch (e) { }
-  })();
-});
-
-
-function getSelectedLang (e) {
-  const selectedLangText = selectLangs.options[selectLangs.selectedIndex].text;
-
-  chrome.storage.sync.set({ language: e.target.value }, function () {
-    (async () => {
-      try {
-        translatedText = await translateTo(wdwSelection, e.target.value)
-        createLiElements(wdwSelection, selectedLangText, translatedText);
-      } catch (error) { }
-    })();
   });
-}
 
-function createLiElements (wdwSelection, selectedLangText, gResult) {
+  function onSubmit (e) {
+    e.preventDefault();
 
-  txtAlign = selectedLangText === 'Arabic' ? 'text-align:right !important' : 'text-align:left';
+    let btnSubmit = e.target.elements[e.target.elements.length - 1];
+    btnSubmit.disabled = true;
+    btnSubmit.classList.add('disabled');
 
-  document.getElementById('result').innerHTML = `
-      <li>
-        <span class="mb10">English:</span> 
-        <span>${wdwSelection}</span>
-      </li>
-      <li class="border-top">
-        <span class="mb10">${selectedLangText}:</span>
-        <span style="${txtAlign}">${gResult}</span>
-      </li>
-    `;
-}
+    let fromlang = e.target.elements[0].value;
+    let tolang = e.target.elements[1].value;
+    let selectedText = e.target.elements[3].value.replace(/\(\)\]\[\:\;\=\,/gim, " ").trim();
 
-selectLangs.addEventListener('change', getSelectedLang);
+    translateAndSetResult(fromlang, tolang, selectedText)
+      .then(r => {
+        chrome.storage.local.set({ selectedText }, () => {
+          btnSubmit.disabled = false;
+          btnSubmit.classList.remove('disabled');
+        });
+      })
+      .catch(e => { });
+  }
+
+  document.getElementById('form-translate').addEventListener('submit', onSubmit, false);
+})();

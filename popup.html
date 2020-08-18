@@ -13,23 +13,25 @@
 <body>
 
   <div class="container">
-    <header>
-      <img src="icons/icon64.png" alt="icon">
-      <div class="ml-20">
-        <h3 class="m-0">📖 W-Translate</h3>
-        <p class="text-gray m-0">Fastest way to translate your text.</p>
-      </div>
-    </header>
-    <select name="languages" id="languages"></select>
 
-    <ul id="result" class="list-group"></ul>
+    <form class="mb-10" id="form-translate">
+      
+      <div class="wi-100 di-flex col-3 mb-10">
+        <select name="fromlang" id="fromlang"></select>
+        <select name="tolang" id="tolang"></select>
+        <button type="button" class="di-flex justify-center" id="btn-switch-langs"><img src="assets/reverse.png" alt="reverse"></button>
+      </div>
+
+      <textarea name="text" class="wi-100 mb-10" id="txt-area"required></textarea>
+
+      <button type="submit" class="wi-100">translate</button>      
+    </form>
+
+    <pre id="result"></pre>
   </div>
 
-  <script src="scripts/Select.js"></script>
-  <script src="Translate.js"></script>
-  <script src="scripts/GTranslate.js"></script>
+  <script src="scripts/Utils.js"></script>
+  <script src="scripts/DOM.js"></script>
   <script src="scripts/popup.js" defer></script>
-
 </body>
-
 </html>

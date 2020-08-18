@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "W-Translate",
-  "description": "Translate the selected text in current tab (page) from English to any language by one click..",
+  "description": "Translate the selected text in current tab to any language by one click..",
   "version": "1.0",
   "icons": {
     "256": "icons/icon256.png",
@@ -16,7 +16,6 @@
   },
   "permissions": [
     "activeTab",
-    "declarativeContent",
     "storage"
   ],
   "background": {
@@ -30,11 +29,7 @@
         "<all_urls>"
       ],
       "run_at": "document_end",
-      "css": [
-        "content.css"
-      ],
       "js": [
-        "./scripts/GTranslate.js",
         "./scripts/content.js"
       ]
     }

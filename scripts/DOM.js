@@ -1,4 +1,7 @@
-const langs = {
+let isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+chrome = isChrome ? chrome : browser;
+
+const glanguages = {
   'af': 'Afrikaans',
   'sq': 'Albanian',
   'am': 'Amharic',
@@ -104,8 +107,50 @@ const langs = {
   'yo': 'Yoruba',
   'zu': 'Zulu'
 };
-const selectLangsElement = document.getElementById('languages');
 
-Object.keys(langs).map(l => {
-  selectLangsElement.innerHTML += `<option value="${l}">${langs[l]}</option>`;
-});
+(function () {
+  let selectedLanguages = { fromlang: 'en', tolang: 'ar' };
+  
+  function getSelectedLanguages (result) {    
+    if (result.selectedLanguages) {
+      selectedLanguages = result.selectedLanguages;
+    }
+
+    setupSelectElements(selectedLanguages);
+
+    document.getElementById('btn-switch-langs').addEventListener("click", () => {
+      selectedLanguages = { fromlang: selectedLanguages.tolang, tolang: selectedLanguages.fromlang };
+      setupSelectElements(selectedLanguages);
+      chrome.storage.local.set({ selectedLanguages });
+    }, false);
+  }
+
+  function setupSelectElements (selectedLanguages) {
+    const allSelectElemes = Array.from(document.querySelectorAll("select"));
+
+    allSelectElemes.forEach(selectEl => {
+
+      optionsLanguages(selectEl);
+
+      selectEl.addEventListener('change', (e) => {
+        selectedLanguages = { ...selectedLanguages, [e.target.name]: e.target.value };
+        chrome.storage.local.set({ selectedLanguages });
+      }, false);
+    });
+  };
+
+  // create options language and appended to select element
+  function optionsLanguages (selectEl) {
+    Object.keys(glanguages).forEach(lang => {
+      const option = document.createElement('option');
+      option.value = lang;
+      option.textContent = glanguages[lang];
+      selectEl.appendChild(option);
+    });
+
+    if (selectEl.name === 'fromlang') selectEl.value = selectedLanguages.fromlang;
+    if (selectEl.name === 'tolang') selectEl.value = selectedLanguages.tolang;
+  }
+
+  chrome.storage.local.get(['selectedLanguages'], getSelectedLanguages);
+})();
