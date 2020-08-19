@@ -1,8 +1,10 @@
 :root {
-  --dark: #202529;
-  --light-dark: #404148;
+  --dark: #4cd56d;
+  --light-dark: rgba(48, 99, 50, 0.192);
+  --black: #111111;
   --white: #ffffff;
-  --gray: #eaeaea;
+  --light: #f3f3f3;
+  --green:#4caf50;
   --box-shad: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 
@@ -17,24 +19,38 @@ html {
   font-family: sans-serif;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: var(--dark);
+  -webkit-tap-highlight-color: var(--black);
 }
 
 body {
+  width: 300px;
   margin: 0;
-  background-color: var(--white);
+  background-color: var(--black);
+  background:linear-gradient(135deg,rgb(255 255 255 / 93%),rgb(21 134 0 / 78%)),url(assets/bg.jpg);
   overflow-x: hidden;
 }
 
-.container {
-  width: 300px;
-  padding: 10px;
+header {
+  display: flex;
+  align-items: center;
+  border-radius: 0;  
+  border-bottom: 1px solid var(--light-dark);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.container, header {padding:10px;}
+
+h3 {
+  text-align: center;
+    margin: 0;    
 }
 
 textarea,
 pre,
 select {
-  background-color: var(--gray);
+  background-color: var(--light);
+  color: var(--black);
   width: 100%;
   font-size: 14px;
   padding: 7px 10px;
@@ -47,13 +63,16 @@ pre {
   white-space: pre-wrap;
   white-space: -moz-pre-wrap;
   word-wrap: break-word;
+  -moz-user-select: text;
+  -webkit-user-select: text;
 }
+
+small {font-size: 8px;}
 
 button,
 a {
+  background: var(--light-dark);
   color: var(--white);
-  background: #4caf50;
-
   border: 0;
   font-size: 12px;
   font-weight: 600;
@@ -64,11 +83,10 @@ a {
   cursor: pointer;
   transition: all .25s;
 
-  pointer-events: initial;
   text-transform: uppercase;
   text-align: center;
   text-decoration: none;
-  -webkit-font-smoothing: antialiased;
+  letter-spacing:2px;
 }
 
 button img {
@@ -78,7 +96,7 @@ button img {
 
 button:hover,
 a:hover {
-  background-color: var(--light-dark);
+  background-color: var(--dark);
 }
 
 textarea {
@@ -98,8 +116,14 @@ button {
   justify-content: space-between;
 }
 
+.di-flex-col {display:flex; flex-direction: column;}
+
 .justify-center {
   justify-content: center;
+}
+
+.align-center {
+  align-items: center;
 }
 
 .col-3>* {
@@ -117,10 +141,10 @@ button {
   margin-bottom: 10px;
 }
 
-.mr-10 {
-  margin-right: 10px;
+.mr-5 {
+  margin-right: 5px;
 }
 
 .disabled {
-  background-color: var(--light-dark);
+  background-color: var(--green);
 }

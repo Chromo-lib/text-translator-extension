@@ -2,10 +2,6 @@ let isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator
 chrome = isChrome ? chrome : browser;
 
 window.addEventListener('click', () => {
-  if (chrome.runtime.lastError) {
-    return;
-  }
-  else {
-    chrome.runtime.sendMessage({ selectedText: window.getSelection().toString() });
-  }
+  chrome.runtime.sendMessage({ selectedText: window.getSelection().toString() });
+  void chrome.runtime.lastError;
 }, false);

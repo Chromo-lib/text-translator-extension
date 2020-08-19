@@ -14,7 +14,7 @@
     btnSubmit.classList.add('disabled');
 
     let fromlang = e.target.elements[0].value;
-    let tolang = e.target.elements[1].value;
+    let tolang = e.target.elements[2].value;
     let selectedText = e.target.elements[3].value.replace(/\(\)\]\[\:\;\=\,/gim, " ").trim();
 
     translateAndSetResult(fromlang, tolang, selectedText)

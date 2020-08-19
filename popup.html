@@ -5,33 +5,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>W-Translator</title>
+  <title>W-Translate</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+  <header>
+    <img src="icons/icon32.png" alt="translate" class="mr-5" />
+    <div class="di-flex-col">
+      <h3>W-Translate</h3>
+      <small>From any to any</small>
+    </div>
+  </header>
+
   <div class="container">
 
     <form class="mb-10" id="form-translate">
-      
+
       <div class="wi-100 di-flex col-3 mb-10">
         <select name="fromlang" id="fromlang"></select>
+        <button type="button" class="di-flex justify-center" id="btn-switch-langs"><img src="assets/reverse.png"
+            alt="reverse"></button>
         <select name="tolang" id="tolang"></select>
-        <button type="button" class="di-flex justify-center" id="btn-switch-langs"><img src="assets/reverse.png" alt="reverse"></button>
       </div>
 
-      <textarea name="text" class="wi-100 mb-10" id="txt-area"required></textarea>
+      <textarea name="text" class="wi-100 mb-10" id="txt-area" required></textarea>
 
-      <button type="submit" class="wi-100">translate</button>      
+      <button type="submit" class="wi-100">translate</button>
     </form>
 
     <pre id="result"></pre>
+    <!-- <pre id="more-result"></pre> -->
   </div>
 
   <script src="scripts/Utils.js"></script>
   <script src="scripts/DOM.js"></script>
   <script src="scripts/popup.js" defer></script>
 </body>
+
 </html>
