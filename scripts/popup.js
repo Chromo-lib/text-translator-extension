@@ -27,5 +27,5 @@
       .catch(e => { });
   }
 
-  document.getElementById('form-translate').addEventListener('submit', onSubmit, false);
+  formTranslate.addEventListener('submit', onSubmit, false);  
 })();

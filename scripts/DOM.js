@@ -1,6 +1,3 @@
-let isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-chrome = isChrome ? chrome : browser;
-
 const glanguages = {
   'af': 'Afrikaans',
   'sq': 'Albanian',
@@ -110,8 +107,8 @@ const glanguages = {
 
 (function () {
   let selectedLanguages = { fromlang: 'en', tolang: 'ar' };
-  
-  function getSelectedLanguages (result) {    
+
+  function getSelectedLanguages (result) {
     if (result.selectedLanguages) {
       selectedLanguages = result.selectedLanguages;
     }
@@ -152,5 +149,21 @@ const glanguages = {
     if (selectEl.name === 'tolang') selectEl.value = selectedLanguages.tolang;
   }
 
+  function txtToSpeach () {
+    if ('speechSynthesis' in window && resultPre.value.length > 0) {
+      let msg = new SpeechSynthesisUtterance();
+      msg.lang = selectedLanguages.tolang;
+      msg.text = resultPre.value;
+      window.speechSynthesis.speak(msg);
+    }
+  }
+
+  function copyToClp () {
+    resultPre.select();
+    document.execCommand('copy');
+  }
+
+  btnCopy.addEventListener('click', copyToClp, false);
+  btnTxtToSpeech.addEventListener('click', txtToSpeach, false);
   chrome.storage.local.get(['selectedLanguages'], getSelectedLanguages);
 })();
