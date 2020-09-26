@@ -1,6 +1,7 @@
 :root {
-  --dark: rgb(25, 25, 27);
-  --light-dark: rgba(37, 38, 44, 0.452);
+  --dark: #19191b;
+  --light-dark: #20291f4f;
+  --hover:#33374d28;
   --white: #ffffff;
   --light: #f3f3f3;
   --box-shad: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
@@ -21,14 +22,15 @@ html {
 }
 
 body {
+  background: #2d2d2e;
+  background-image: linear-gradient(0deg,rgba(17,14,31,.35),rgba(17,14,31,.35)),linear-gradient(330deg,#2d0b6c -10%,#498ca3 46.3%,#d95749 110%);
   width: 300px;
-  margin: 0;
-  background: linear-gradient(0deg,rgba(17,14,31,.35),rgb(17 14 31 / 0%)),linear-gradient(330deg,#161715b8 -10%,#2f332fa8 46.3%,#191818db 110%);
-  color: var(--white);
+  margin: 0;  
   overflow-x: hidden;
 }
 
-header {
+header {  
+  color: #fff;
   display: flex;
   align-items: center;
   border-radius: 0;  
@@ -51,7 +53,7 @@ a {
   font-size: 12px;
   letter-spacing: 1px;
 
-  padding: 7px;
+  padding: 5px;
   cursor: pointer;
   transition: all .25s;
   text-align: center;
@@ -63,7 +65,7 @@ button img { width: 20px;  height: 20px;}
 
 button:hover,
 a:hover {
-  background-color: var(--dark);
+  background-color: var(--hover);
 }
 
 button,
@@ -74,12 +76,13 @@ svg {
 
 textarea,
 select {
-  background-color: var(--light);
+  background-color: var(--white);
   color: var(--dark);
   width: 100%;
   font-size: 14px;
   padding: 7px;
   border: 0;
+  outline: none !important;
 }
 
 textarea,
@@ -106,6 +109,8 @@ textarea { resize: vertical;}
   max-width: 100%;
   min-width: 0;
 }
+
+.py-10 {padding: 10px 0;}
 
 .mb-10 {
   margin-bottom: 10px;
